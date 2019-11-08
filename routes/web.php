@@ -16,41 +16,25 @@
 // });
 
 //FRONTEND
-Route::get('about', function () {
-    echo 'about';
-});
-Route::get('contact', function () {
-    echo 'contact';
-});
-Route::get('', function () {
-    echo 'index';
-});
+Route::get('', 'frontend\HomeController@getIndex');
+Route::get('contact', 'frontend\HomeController@getContact');
+Route::get('about', 'frontend\HomeController@getAbout');
 
 //cart
 Route::group(['prefix' => 'cart'], function () {
-    Route::get('', function () {
-        echo 'cart';
-    });
+    Route::get('', 'frontend\CartController@getCart');
 });
 
 //checkout
 Route::group(['prefix' => 'checkout'], function () {
-    Route::get('', function () {
-        echo 'checkout';
-    });
-    Route::get('complete', function () {
-        echo 'complete';
-    });
+    Route::get('', 'frontend\CheckoutController@getCheckout');
+    Route::get('complete', 'frontend\CheckoutController@getComplete');
 });
 
 //product
 Route::group(['prefix' => 'product'], function () {
-    Route::get('shop', function () {
-        echo 'shop';
-    });
-    Route::get('detail', function () {
-        echo 'detail';
-    });
+    Route::get('shop','frontend\ProductController@getShop' );
+    Route::get('detail', 'frontend\ProductController@getDetail');
 });
 
 
