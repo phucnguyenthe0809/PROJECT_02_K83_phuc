@@ -28,6 +28,7 @@ Route::group(['prefix' => 'cart'], function () {
 //checkout
 Route::group(['prefix' => 'checkout'], function () {
     Route::get('', 'frontend\CheckoutController@getCheckout');
+    Route::post('', 'frontend\CheckoutController@postCheckout');
     Route::get('complete', 'frontend\CheckoutController@getComplete');
 });
 
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'product'], function () {
 //BACKEND
 //login
 Route::get('login', 'backend\LoginController@getLogin');
+Route::post('login', 'backend\LoginController@postLogin');
 
 Route::group(['prefix' => 'admin'], function () {
     //admin
@@ -52,6 +54,7 @@ Route::group(['prefix' => 'admin'], function () {
     //category
     Route::group(['prefix' => 'category'], function () {
         Route::get('', 'backend\CategoryController@getCategory');
+        Route::post('', 'backend\CategoryController@postAddCategory');
         Route::get('edit','backend\CategoryController@getEditCategory');
     });
 
@@ -66,6 +69,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'product'], function () {
         Route::get('', 'backend\ProductController@getProduct');
         Route::get('add', 'backend\ProductController@getAddProduct');
+        Route::post('add', 'backend\ProductController@postAddProduct');
         Route::get('edit','backend\ProductController@getEditProduct' );
     });
 
@@ -73,6 +77,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('', 'backend\UserController@getUser');
         Route::get('add','backend\UserController@getAddUser' );
+        Route::post('add','backend\UserController@postAddUser' );
         Route::get('edit', 'backend\UserController@getEditUser');
     });
 
