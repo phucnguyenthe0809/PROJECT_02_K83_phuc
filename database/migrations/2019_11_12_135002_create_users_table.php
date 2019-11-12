@@ -15,12 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('email',50)->unique();//dung unique không được để chiều dài chuỗi vượt quá 100 ký tự
             $table->string('password');
+            $table->string('full')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->tinyInteger('level');
+            //tạo cột tên là reamember_token
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 

@@ -16,6 +16,9 @@
 // });
 
 //FRONTEND
+
+use Illuminate\Routing\RouteGroup;
+
 Route::get('', 'frontend\HomeController@getIndex');
 Route::get('contact', 'frontend\HomeController@getContact');
 Route::get('about', 'frontend\HomeController@getAbout');
@@ -84,6 +87,84 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
+
+//---LÝ THUYẾT-----
+
+//SCHEMA
+
+Route::group(['prefix' => 'schema'], function () {
+
+    //tạo bảng
+    Route::get('create', function () {
+        Schema::create('users', function ($table) {
+            $table->bigIncrements('id');     //khóa chính, tự tăng ,bigInt, unsigned
+            $table->string('name');          // varchar
+            $table->string('address', 100)->nullable();// varchar(100) , có thể null
+            $table->timestamps();            // trường thời gian created_at , updated_at
+        });
+
+    //tạo bảng chứa khóa ngoại
+    // bảng chứa khóa ngoại(bảng phụ) phải tạo sau bảng chứa khóa chính (bảng chính)
+        Schema::create('post', function ($table) {
+            $table->bigIncrements('id');
+            $table->string('name', 100)->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+    });
+
+
+
+//sửa bảng
+    Route::get('edit', function () {
+        //sửa tên bảng
+        // Schema::rename('users', 'thanh-vien');    //sửa tên bảng từ users thành thanh-vien
+
+        //xóa cột trong bảng
+        Schema::table('thanh-vien', function ($table) {
+            $table->dropColumn('address');        // xóa cột address
+        });
+    });
+
+//xóa bảng
+    Route::get('del', function () {
+        Schema::dropIfExists('thanh-vien');
+
+    });
+
+
+//tương tác với cột trong bảng
+    //cần cập nhật doctrine
+    //composer require doctrine/dbal
+
+Route::get('edit-col', function () {
+
+
+    Schema::table('users', function ($table) {
+        //sửa cột
+        // $table->string('name',50)->nullable()->change();
+
+        //thêm cột
+        // $table->boolean('level')->default(0);
+
+        //thêm cột ở vị trí xác định
+        $table->boolean('level')->default(0)->after('name');   //thêm cột ngay sau cột name
+
+        //xóa cột
+        // $table->dropColumn('level');
+
+    });
+
+
+
+});
+
+
+
+
+
+});
 
 
 
