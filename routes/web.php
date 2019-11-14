@@ -156,15 +156,122 @@ Route::get('edit-col', function () {
 
     });
 
+});
+
+});
+
+//QUUERY BUILDER
+
+Route::group(['prefix' => 'query'], function () {
+
+    //thêm dữ liệu database
+    Route::get('insert', function () {
+        //thêm 1 bản ghi
+        DB::table('users')->insert([
+            "email"=>"A@gmail.com",
+            "password"=>"123456",
+            "full"=>"Nguyen Van A",
+            "address"=>"ha noi",
+            "phone"=>"123456789",
+            "level"=>"1"
+        ]);
+        //thêm nhiều bản ghi
+        DB::table('users')->insert([
+            ["email"=>"B@gmail.com","password"=>"123456","full"=>"Nguyen Van B","address"=>"ha noi","phone"=>"123456780","level"=>"0"],
+            ["email"=>"C@gmail.com","password"=>"123456","full"=>"Nguyen Van C","address"=>"ha noi","phone"=>"123456781","level"=>"0"],
+            ["email"=>"D@gmail.com","password"=>"123456","full"=>"Nguyen Van D","address"=>"ha noi","phone"=>"123456782","level"=>"0"],
+            ["email"=>"E@gmail.com","password"=>"123456","full"=>"Nguyen Van E","address"=>"ha noi","phone"=>"123456783","level"=>"0"]
+        ]);
+    });
+
+    //sửa dữ liệu database
+    Route::get('update', function () {
+        DB::table('users')->where('id',2)->update(["address"=>"bac giang","phone"=>"0987654321"]);
+    });
+
+    //xóa dữ liệu
+    Route::get('del', function () {
+        //xóa 1 bản ghi
+        // DB::table('users')->where('id',2)->delete();
+
+        //xóa tất cả bản ghi
+        DB::table('users')->delete();
+    });
+
+
+    //nâng cao
+//tương tác với các bản ghi
+
+//lấy ra bản ghi
+//sử get() hoặc first()
+    Route::get('get', function () {
+        //lấy nhiều bản ghi
+        // $user=DB::table('users')->get();
+        // dd($user);
+
+        //lấy bản ghi đầu tiên
+        // $user=DB::table('users')->first();
+        // dd($user);
+
+        //lấy bản ghi theo id
+        $user=DB::table('users')->find(8);
+        dd($user);
+    });
+
+    //lấy bản ghi theo điều kiện
+    Route::get('where', function () {
+    //where
+        // $user=DB::table('users')->where('phone','123456789')->get();
+        // dd($user);
+        // $user=DB::table('users')->where('id','<>','7')->get();
+        // dd($user);
+
+    //where-and
+        // $user=DB::table('users')->where('id','>','7')->where('level',1)->get();
+        // dd($user);
+
+    //where-or
+        // $user=DB::table('users')->where('id','>','9')->orwhere('id','<',7)->get();
+        // dd($user);
+
+    //whereBetween
+        $user=DB::table('users')->whereBetween('id',[7,9])->get();
+        dd($user);
+    });
+
+    //sắp xếp orderBy()
+    Route::get('order-by', function () {
+        $user=DB::table('users')->orderBy('id','desc')->get();
+        dd($user);
+    });
+
+    //lấy một số lượng bản ghi xác định
+    Route::get('take', function () {
+        $user=DB::table('users')->take(3)->get();
+        dd($user);
+    });
+
+    //bỏ qua bản ghi skip()
+    Route::get('bo-qua', function () {
+        $user=DB::table('users')->skip(2)->take(3)->get();
+        dd($user);
+    });
+
+
+
+
+
+
+
+
+
+
 
 
 });
 
 
 
-
-
-});
 
 
 
