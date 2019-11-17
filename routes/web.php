@@ -81,7 +81,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('', 'backend\UserController@getUser');
         Route::get('add','backend\UserController@getAddUser' );
         Route::post('add','backend\UserController@postAddUser' );
-        Route::get('edit', 'backend\UserController@getEditUser');
+        Route::get('edit/{idUser}', 'backend\UserController@getEditUser');
+        Route::post('edit/{idUser}', 'backend\UserController@postEditUser');
+        Route::get('del/{idUser}', 'backend\UserController@delUser');
     });
 
 });

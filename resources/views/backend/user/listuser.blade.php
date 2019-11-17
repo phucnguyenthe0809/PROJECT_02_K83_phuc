@@ -27,13 +27,13 @@
                 <div class="panel-body">
                     <div class="bootstrap-table">
                         <div class="table-responsive">
-                            <div class="alert bg-success" role="alert">
-                                <svg class="glyph stroked checkmark">
-                                    <use xlink:href="#stroked-checkmark"></use>
-                                </svg>Đã thêm thành công<a href="#" class="pull-right"><span
-                                        class="glyphicon glyphicon-remove"></span></a>
+                            @if (session('thongbao'))
+                            <div class="alert alert-success" role="alert">
+                                <strong>{{session('thongbao')}}</strong>
                             </div>
-                            <a href="adduser.html" class="btn btn-primary">Thêm Thành viên</a>
+                            @endif
+
+                            <a href="/admin/user/add" class="btn btn-primary">Thêm Thành viên</a>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
@@ -49,44 +49,31 @@
                                 </thead>
                                 <tbody>
 
+                                    @foreach ($users as $row)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Admin@gmail.com</td>
-                                        <td>Nguyễn thế phúc</td>
-                                        <td>Thường tín</td>
-                                        <td>0356653300</td>
-                                        <td>1</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
-                                                    aria-hidden="true"></i> Sửa</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i> Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Admin@gmail.com</td>
-                                        <td>Nguyễn thế phúc</td>
-                                        <td>Thường tín</td>
-                                        <td>0356653300</td>
-                                        <td>1</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
-                                                    aria-hidden="true"></i> Sửa</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i> Xóa</a>
-                                        </td>
-                                    </tr>
+                                        <td>{{$row->id}}</td>
+                                            <td>{{$row->email}}</td>
+                                            <td>{{$row->full}}</td>
+                                            <td>{{$row->address}}</td>
+                                            <td>{{$row->phone}}</td>
+                                            <td>{{$row->level}}</td>
+                                            <td>
+                                            <a href="/admin/user/edit/{{$row->id}}" class="btn btn-warning"><i class="fa fa-pencil"
+                                                        aria-hidden="true"></i> Sửa</a>
+                                            <a onclick="return del('{{$row->full}}')" href="/admin/user/del/{{$row->id}}" class="btn btn-danger"><i class="fa fa-trash"
+                                                        aria-hidden="true"></i> Xóa</a>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+
+
 
                                 </tbody>
                             </table>
                             <div align='right'>
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
+                                  {{$users->links()}}
                                 </ul>
                             </div>
                         </div>
@@ -102,10 +89,14 @@
         <!--end main-->
 
         <!-- javascript -->
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/chart.min.js"></script>
-        <script src="js/chart-data.js"></script>
+        @section('script')
+            @parent
+            <script>
+                function del(name){
+                    return confirm('Bạn có muốn xóa thành viên ' +name+ ' này không');
+                }
+            </script>
+        @endsection
 
 
 
