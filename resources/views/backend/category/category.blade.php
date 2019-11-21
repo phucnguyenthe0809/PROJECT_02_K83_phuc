@@ -29,9 +29,9 @@
 
                             <div class="form-group">
                                 <label for="">Danh mục cha:</label>
-                                <select class="form-control" name="category" id="">
+                                <select class="form-control" name="parent" id="">
                                     <option value="0">----ROOT----</option>
-                                    {{getCate($categories,0,"")}}
+                                    {{getCate($categories,0,"",0)}}
                                 </select>
                             </div>
                             <div class="form-group">
@@ -75,4 +75,31 @@
     </div>
     <!--/.row-->
 </div>
+@endsection
+@section('script')
+    @parent
+
+	<script>
+		$('#calendar').datepicker({});
+
+		! function ($) {
+			$(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+				$(this).find('em:first').toggleClass("glyphicon-minus");
+			});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+			if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+			if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+    </script>
+
+<script>
+        function del(name){
+            return confirm('Bạn thực sự muốn xóa danh mục ' + name +' này ?');
+        }
+    </script>
 @endsection

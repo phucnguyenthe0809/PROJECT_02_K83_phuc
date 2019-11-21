@@ -9,13 +9,17 @@ function showErrors($errors,$name){
 }
 
 
-function getCate($arr,$parent,$tab){
+function getCate($arr,$parent,$tab,$idSelect){
 	foreach($arr as $value){
 
 		if($value['parent']==$parent){
-			echo '<option value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
+            if($value['id']==$idSelect){
+                echo '<option selected value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
+            }else{
+                echo '<option value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
+            }
 
-		    getCate($arr,$value['id'],$tab.'--|');
+		    getCate($arr,$value['id'],$tab.'--|',$idSelect);
 
 		}
 	}
@@ -26,8 +30,8 @@ function showCate($arr,$parent,$tab){
 
 		if($value['parent']==$parent){
 			echo '<div class="item-menu"><span>'.$tab.$value['name'].'</span><div class="category-fix">';
-            echo '<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>';
-            echo '<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>';
+            echo '<a class="btn-category btn-primary" href="/admin/category/edit/'.$value['id'].'"><i class="fa fa-edit"></i></a>';
+            echo '<a onclick="return del('."'".$value['name']."'".')" class="btn-category btn-danger" href="/admin/category/del/'.$value['id'].'"><i class="fas fa-times"></i></i></a>';
             echo '</div></div>';
 
 		    showCate($arr,$value['id'],$tab.'--|');
