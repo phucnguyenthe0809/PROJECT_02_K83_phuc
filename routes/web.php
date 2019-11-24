@@ -261,18 +261,43 @@ Route::group(['prefix' => 'query'], function () {
         dd($user);
     });
 
-
-
-
-
-
-
-
-
-
-
-
 });
+
+
+//RELATIONSHIP
+    //bảng chính là bảng chứa khóa chính trong liên kết
+    //bảng phụ là bảng chứa khóa ngoại (khóa phụ) trong liên kết
+
+    //liên kết 1-1-xuôi : return $this->hasOne()
+    //liên kết 1-1- ngược : return $this->belongsTo()
+    //liên kết 1-n : return $this->hasMany()
+    //liên kết n-n : return $this->belongsToMany('table_2', 'pivot_table', 'key_1', 'key_2');
+
+
+
+
+
+
+    //liên kết 1-1 xuôi
+    Route::get('lien-ket-1-1', function () {
+        $user=App\User::find(3);
+        $info=$user->info()->get();
+        dd($info->toarray());
+    });
+
+    //liên kết 1-1 ngược
+    Route::get('lien-ket-1-1-n', function () {
+        $info=App\models\info::find(3);
+        $user=$info->user()->get();
+        dd($user->toarray());
+    });
+
+    //liên kết 1-n
+    Route::get('lien-ket-1-n', function () {
+        $cate=App\models\Category::find(6);
+        $prd=$cate->product()->get();
+        dd($prd->toarray());
+    });
 
 
 
