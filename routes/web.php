@@ -75,7 +75,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('', 'backend\ProductController@getProduct');
         Route::get('add', 'backend\ProductController@getAddProduct');
         Route::post('add', 'backend\ProductController@postAddProduct');
-        Route::get('edit','backend\ProductController@getEditProduct' );
+        Route::get('edit/{idPrd}','backend\ProductController@getEditProduct' );
+        Route::post('edit/{idPrd}','backend\ProductController@postEditProduct' );
+        Route::get('del/{idPrd}','backend\ProductController@DelProduct' );
     });
 
     //user

@@ -13,42 +13,41 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Sửa sản phẩm</div>
                 <div class="panel-body">
+                    <form method="post" enctype="multipart/form-data">
+                        @csrf
                     <div class="row" style="margin-bottom:40px">
 
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Danh mục</label>
                                         <select name="category" class="form-control">
-                                            <option value='1' selected>Nam</option>
-                                            <option value='3'>---|Áo khoác nam</option>
-                                            <option value='2'>Nữ</option>
-                                            <option value='4'>---|Áo khoác nữ</option>
+                                            {{getCate($categories,0,"",$prd->category_id)}}
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Mã sản phẩm</label>
-                                        <input  type="text" name="code" class="form-control" value="SP01">
+                                        <input  type="text" name="code" class="form-control" value="{{$prd->code}}">
                                     </div>
                                     <div class="form-group">
                                         <label>Tên sản phẩm</label>
-                                        <input  type="text" name="name" class="form-control" value="Sản phẩm 1">
+                                        <input  type="text" name="name" class="form-control" value="{{$prd->name}}">
                                     </div>
                                     <div class="form-group">
                                         <label>Giá sản phẩm (Giá chung)</label>
-                                        <input  type="number" name="price" class="form-control" value="150000">
+                                        <input  type="number" name="price" class="form-control" value="{{$prd->price}}">
                                     </div>
                                     <div class="form-group">
                                         <label>Sản phẩm có nổi bật</label>
                                         <select  name="featured" class="form-control">
-                                            <option value="0">Không</option>
-                                            <option selected value="1">Có</option>
+                                            <option @if ($prd->featured==0) selected @endif value="0">Không</option>
+                                            <option @if ($prd->featured==1) selected @endif value="1">Có</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <select  name="state" class="form-control">
-                                            <option value="1">Còn hàng</option>
-                                            <option selected value="0">Hết hàng</option>
+                                            <option @if ($prd->state==1) selected @endif value="1">Còn hàng</option>
+                                            <option @if ($prd->state==0) selected @endif value="0">Hết hàng</option>
                                         </select>
                                     </div>
                                 </div>
@@ -57,13 +56,13 @@
                                         <label>Ảnh sản phẩm</label>
                                         <input id="img" type="file" name="img" class="form-control hidden"
                                             onchange="changeImg(this)">
-                                        <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/import-img.png">
+                                        <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/{{$prd->img}}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Thông tin</label>
-                                        <textarea  name="info" style="width: 100%;height: 100px;"></textarea>
+                                        <textarea  name="info" style="width: 100%;height: 100px;">{{$prd->info}}</textarea>
                                     </div>
                                 </div>
                     </div>
@@ -71,13 +70,14 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Miêu tả</label>
-                                    <textarea id="editor"  name="describe" style="width: 100%;height: 100px;"></textarea>
+                                    <textarea id="editor"  name="describe" style="width: 100%;height: 100px;">{{$prd->describe}}</textarea>
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Sửa sản phẩm</button>
                                 <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                             </div>
                         </div>
                     <div class="clearfix"></div>
+                </form>
                 </div>
             </div>
 

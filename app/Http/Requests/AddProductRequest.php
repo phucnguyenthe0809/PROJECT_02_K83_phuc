@@ -24,7 +24,7 @@ class AddProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'code'=>'required|min:3',
+            'code'=>'required|min:3|unique:product,code',
             'name'=>'required|min:3',
             'price'=>'required|numeric',
             'img'=>'image', // file phải là định dạng ảnh
@@ -35,6 +35,7 @@ class AddProductRequest extends FormRequest
         return [
             'code.required'=>'Mã sản phẩm không được để trống!',
             'code.min'=>'Mã sản phẩm phải lớn hơn 3 ký tự!',
+            'code.unique'=>'Mã sản phẩm đã tồn tại!',
             'name.required'=>'Tên sản phẩm không được để trống!',
             'name.min'=>'Tên sản phẩm phải lớn hơn 3 ký tự!!',
             'price.required'=>'Giá sản phẩm không được để trống!',
