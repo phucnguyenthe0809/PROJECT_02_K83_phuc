@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
+use App\Http\Requests\EditProductRequest;
 use Illuminate\Http\Request;
 use App\models\Product;
 use App\models\Category;
@@ -50,7 +51,7 @@ class ProductController extends Controller
         $data['categories']=Category::all();
         return view('backend.product.editproduct',$data);
     }
-    function postEditProduct($idPrd,request $r){
+    function postEditProduct($idPrd,EditProductRequest $r){
         $prd=Product::find($idPrd);
         $prd->code=$r->code;
         $prd->name=$r->name;
@@ -76,7 +77,8 @@ class ProductController extends Controller
         return redirect('/admin/product')->with('thongbao','Đã sửa thành công');
     }
 
-    function DelProduct(){
-
+    function DelProduct($idPrd){
+        Product::find($idPrd)->delete();
+        return redirect('/admin/product')->with('thongbao','Đã xóa thành công');
     }
 }

@@ -27,14 +27,17 @@
                                     <div class="form-group">
                                         <label>Mã sản phẩm</label>
                                         <input  type="text" name="code" class="form-control" value="{{$prd->code}}">
+                                        {{showErrors($errors,'code')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Tên sản phẩm</label>
                                         <input  type="text" name="name" class="form-control" value="{{$prd->name}}">
+                                        {{showErrors($errors,'name')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Giá sản phẩm (Giá chung)</label>
                                         <input  type="number" name="price" class="form-control" value="{{$prd->price}}">
+                                        {{showErrors($errors,'price')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Sản phẩm có nổi bật</label>
@@ -56,6 +59,7 @@
                                         <label>Ảnh sản phẩm</label>
                                         <input id="img" type="file" name="img" class="form-control hidden"
                                             onchange="changeImg(this)">
+                                            {{showErrors($errors,'img')}}
                                         <img id="avatar" class="thumbnail" width="100%" height="350px" src="img/{{$prd->img}}">
                                     </div>
                                 </div>

@@ -76,7 +76,7 @@
                                         <td>{{$row->category->name}}</td>
                                         <td >
                                             <a href="/admin/product/edit/{{$row->id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-                                            <a href="/admin/product/del/{{$row->id}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
+                                            <a onclick="return del()" href="/admin/product/del/{{$row->id}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -102,4 +102,13 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+@parent
+<script>
+    function del(){
+        return confirm('Bạn muốn xóa sản phẩm này');
+    }
+</script>
+
 @endsection
