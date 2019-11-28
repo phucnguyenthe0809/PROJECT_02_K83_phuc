@@ -18,11 +18,11 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
-					<form role="form" method="POST">
+					<form role="form" method="POST" id="frm">
                         @csrf
 						<fieldset>
 							<div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                            <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">
                                 {{showErrors($errors,'email')}}
                             </div>
 
@@ -35,7 +35,8 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            {{-- <button type="submit" class="btn btn-primary">Login</button> --}}
+                            <a onclick="return submit()" class="btn btn-primary">Login</a>
 						</fieldset>
 					</form>
 				</div>
@@ -43,5 +44,10 @@
 		</div><!-- /.col-->
 	</div><!-- /.row -->
 </body>
+<script>
+    function submit(){
+        document.getElementById('frm').submit();
+    }
+</script>
 
 </html>

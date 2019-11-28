@@ -21,7 +21,7 @@ class UserController extends Controller
     function postAddUser(AddUserRequest $r) {
         $user=new User;
         $user->email=$r->email;
-        $user->password=$r->password;
+        $user->password=bcrypt($r->password);
         $user->full=$r->full;
         $user->address=$r->address;
         $user->phone=$r->phone;
@@ -38,7 +38,7 @@ class UserController extends Controller
     function postEditUser($idUser, EditUserRequest $r){
         $user=User::find($idUser);
         $user->email=$r->email;
-        $user->password=$r->password;
+        $user->password=bcrypt($r->password);
         $user->full=$r->full;
         $user->address=$r->address;
         $user->phone=$r->phone;

@@ -47,10 +47,11 @@ Route::group(['prefix' => 'product'], function () {
 //------------------------
 //BACKEND
 //login
-Route::get('login', 'backend\LoginController@getLogin');
+Route::get('login', 'backend\LoginController@getLogin')->middleware('CheckLogout');
 Route::post('login', 'backend\LoginController@postLogin');
+Route::get('logout', 'backend\LoginController@getLogout');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     //admin
     Route::get('', 'backend\IndexController@getIndex');
 
