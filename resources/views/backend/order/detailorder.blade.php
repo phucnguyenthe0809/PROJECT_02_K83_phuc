@@ -25,10 +25,10 @@
                                         <div class="panel panel-blue">
                                             <div class="panel-heading dark-overlay">Thông tin khách hàng</div>
                                             <div class="panel-body">
-                                                <strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : Nguyễn thế phúc</strong> <br>
-                                                <strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: 0356653300</strong>
+                                                <strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> :{{$order->full}}</strong> <br>
+                                                <strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: {{$order->phone}}</strong>
                                                 <br>
-                                                <strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : Thường tín</strong>
+                                                <strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : {{$order->address}}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -47,42 +47,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($order->product_order as $row)
                                     <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
+                                            <td>1</td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                    <img width="100px" src="img/{{$row->img}}" class="thumbnail">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p><b>Mã sản phẩm</b>: {{$row->code}}</p>
+                                                        <p><b>Tên Sản phẩm</b>: {{$row->name}}</p>
+                                                        <p><b>Số lương</b> : {{$row->qty}}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <p><b>Mã sản phẩm</b>: SP01</p>
-                                                    <p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-                                                    <p><b>Số lương</b> : 2</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>500.000 VNĐ</td>
-                                        <td>1.000.000 VNĐ</td>
+                                            </td>
+                                            <td>{{number_format($row->price,0,"",".")}} VNĐ</td>
+                                            <td>{{number_format($row->price*$row->qty,0,"",".")}} VNĐ</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p><b>Mã sản phẩm</b>: SP02</p>
-                                                    <p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-                                                    <p><b>Số lương</b> : 1</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>500.000 VNĐ</td>
-                                        <td>500.000 VNĐ</td>
+                                        </tr>
+                                    @endforeach
 
-                                    </tr>
+
 
                                 </tbody>
 
@@ -94,7 +80,7 @@
                                             <h4 align='right'>Tổng Tiền :</h4>
                                         </th>
                                         <th>
-                                            <h4 align='right' style="color: brown;">1.500.000 VNĐ</h4>
+                                            <h4 align='right' style="color: brown;">{{number_format($order->total,0,"",".")}} VNĐ</h4>
                                         </th>
 
                                     </tr>
@@ -103,7 +89,7 @@
                                 </tbody>
                             </table>
                             <div class="alert alert-primary" role="alert" align='right'>
-                                <a name="" id="" class="btn btn-success" href="#" role="button">Đã xử lý</a>
+                            <a href="/admin/order/process/{{$order->id}}" class="btn btn-success" href="#" role="button">Đã xử lý</a>
                             </div>
                         </div>
                     </div>

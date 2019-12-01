@@ -26,8 +26,8 @@
                         <span class="glyphicon glyphicon-signal icon-50" aria-hidden="true"></span>
                     </div>
                     <div class="col-sm-9 col-lg-8 widget-right">
-                        <div class="large">8.000.000 đ</div>
-                        <div class="text-muted">Doanh thu tháng 7</div>
+                        <div class="large">{{number_format($order->sum('total'),0,"",".")}} đ</div>
+                    <div class="text-muted">Doanh thu tháng {{$month}}</div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         </svg>
                     </div>
                     <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large">24</div>
+                    <div class="large">{{$order->count()}}</div>
                         <div class="text-muted">Số đơn hàng</div>
                     </div>
                 </div>
@@ -66,5 +66,55 @@
     </div>
     <!--/.row-->
 
+
 </div>
+@endsection
+@section('script')
+@parent
+<script>
+var lineChartData = {
+			labels : [
+                @foreach ($total as $key=>$value)
+                    "{{$key}}",
+                @endforeach
+            ],
+			datasets : [
+
+				{
+					label: "My Second dataset",
+					fillColor : "rgba(48, 164, 255, 0.2)",
+					strokeColor : "rgba(48, 164, 255, 1)",
+					pointColor : "rgba(48, 164, 255, 1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(48, 164, 255, 1)",
+					data : [
+                        @foreach ($total as $value)
+                            {{$value}},
+                        @endforeach
+                    ]
+				}
+			]
+
+		}
+
+window.onload = function(){
+	var chart1 = document.getElementById("line-chart").getContext("2d");
+	window.myLine = new Chart(chart1).Line(lineChartData, {
+		responsive: true
+	});
+	var chart2 = document.getElementById("bar-chart").getContext("2d");
+	window.myBar = new Chart(chart2).Bar(barChartData, {
+		responsive : true
+	});
+	var chart3 = document.getElementById("doughnut-chart").getContext("2d");
+	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {responsive : true
+	});
+	var chart4 = document.getElementById("pie-chart").getContext("2d");
+	window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
+	});
+
+};
+</script>
+
 @endsection
