@@ -11,7 +11,7 @@
                         <ul>
                             <li class="active"><a href="index.html">Trang chủ</a></li>
                             <li class="has-dropdown">
-                                <a href="shop.html">Cửa hàng</a>
+                                <a href="/product/shop">Cửa hàng</a>
                                 <ul class="dropdown">
                                     <li><a href="cart.html">Giỏ hàng</a></li>
                                     <li><a href="checkout.html">Thanh toán</a></li>
