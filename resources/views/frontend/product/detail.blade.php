@@ -17,8 +17,7 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <form action="product/AddCart" method="post">
-
+                                <form action="/cart/add" method="get">
                                     <div class="desc">
                                         <h3>{{$prd->name}} {{$prd->code}}</h3>
                                         <p class="price">
@@ -27,10 +26,7 @@
                                         <p>thông tin</p>
                                         <p style="text-align: justify;">
                                                 {{$prd->info}}
-
                                         </p>
-
-
                                         <div class="row row-pb-sm">
                                             <div class="col-md-4">
                                                 <div class="input-group">
@@ -52,7 +48,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="id_product" value="1">
+                                        <input type="hidden" name="id_product" value="{{$prd->id}}">
                                         <p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ
                                                 hàng</button></p>
                                     </div>
@@ -96,16 +92,16 @@
                                 style="background-image: url(/backend/img/{{$row->img}});">
                                 <div class="cart">
                                     <p>
-                                        <span class="addtocart"><a href="cart.html"><i
+                                        <span class="addtocart"><a href="/cart/add?id_product={{$row->id}}"><i
                                                     class="icon-shopping-cart"></i></a></span>
-                                        <span><a href="/product/{{$row->slug}}-{{$row->id}}"><i class="icon-eye"></i></a></span>
+                                        <span><a href="/product/detail/{{$row->slug}}-{{$row->id}}"><i class="icon-eye"></i></a></span>
 
 
                                     </p>
                                 </div>
                             </div>
                             <div class="desc">
-                                <h3><a href="/product/{{$row->slug}}-{{$row->id}}">{{$row->name}}</a></h3>
+                                <h3><a href="/product/detail/{{$row->slug}}-{{$row->id}}">{{$row->name}}</a></h3>
                                 <p class="price"><span>{{number_format($row->price,0,"",".")}} đ</span></p>
                             </div>
                         </div>

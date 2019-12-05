@@ -40,71 +40,44 @@
                             <span>Xóa</span>
                         </div>
                     </div>
+
+                    @foreach ($cart as $row)
                     <div class="product-cart">
                         <div class="one-forth">
                             <div class="product-img">
                                 <img class="img-thumbnail cart-img"
-                                    src="images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
+                                    src="/backend/img/{{$row->options->img}}">
                             </div>
                             <div class="detail-buy">
-                                <h4>Mã : SP01</h4>
-                                <h5>Áo Khoác Nam Đẹp</h5>
+                                <h4>Mã : {{$row->id}}</h4>
+                                <h5>{{$row->name}}</h5>
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <span class="price">680.000 đ</span>
+                                <span class="price">{{number_format($row->price,0,"",".")}} đ</span>
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <input type="number" id="quantity" name="quantity"
-                                    class="form-control input-number text-center" value="1">
+                            <input onchange="return update('{{$row->rowId}}',this.value)" type="number" id="quantity" name="quantity"
+                                class="form-control input-number text-center" value="{{$row->qty}}">
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <span class="price">1.200.000 đ</span>
+                                <span class="price">{{number_format($row->price*$row->qty,0,"",".")}} đ</span>
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <a href="#" class="closed"></a>
+                            <a href="/cart/del/{{$row->rowId}}" class="closed"></a>
                             </div>
                         </div>
                     </div>
-                    <div class="product-cart">
-                        <div class="one-forth">
-                            <div class="product-img">
-                                <img class="img-thumbnail cart-img" src="images/ao-so-mi-trang-kem-asm836-8193.jpg">
-                            </div>
-                            <div class="detail-buy">
-                                <h4>Mã : SP01</h4>
-                                <h5>Áo Khoác Nam Đẹp</h5>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">680.000 đ</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <input type="number" id="quantity" name="quantity"
-                                    class="form-control input-number text-center" value="1">
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">1.200.000 đ</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <a href="#" class="closed"></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+
 
 
                 </div>
@@ -119,10 +92,10 @@
                             <div class="col-md-3 col-md-push-1 text-center">
                                 <div class="total">
                                     <div class="sub">
-                                        <p><span>Tổng:</span> <span>4.000.000 đ</span></p>
+                                        <p><span>Tổng:</span> <span>{{$total}} đ</span></p>
                                     </div>
                                     <div class="grand-total">
-                                        <p><span><strong>Tổng cộng:</strong></span> <span>3.550.000 đ</span></p>
+                                        <p><span><strong>Tổng cộng:</strong></span> <span>{{$total}} đ</span></p>
                                         <a href="checkout.html" class="btn btn-primary">Thanh toán <i
                                                 class="icon-arrow-right-circle"></i></a>
                                     </div>
@@ -138,6 +111,20 @@
 
 @section('script')
     @parent
+    <script>
+        function update(rowId,qty){
+            $.get(
+                "/cart/update/"+rowId+"/"+qty,
+                function(data){
+                    if (data=='success') {
+                        location.reload();
+                    } else {
+                        alert('update false');
+                    }
+                }
+            );
+        }
+    </script>
     <script>
             $(document).ready(function () {
 
