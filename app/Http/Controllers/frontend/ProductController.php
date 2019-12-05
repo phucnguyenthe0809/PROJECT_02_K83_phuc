@@ -37,6 +37,7 @@ class ProductController extends Controller
         $arr=explode('-',$slug_prd);
         $id=array_pop($arr);
         $data['prd']=Product::find($id);
+        $data['prd_new']=Product::where('img','<>','no-img.jpg')->orderBy('updated_at','desc')->take(4)->get();
         return view('frontend.product.detail',$data);
     }
 }
