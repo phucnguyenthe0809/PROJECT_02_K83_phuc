@@ -35,7 +35,7 @@ Route::group(['prefix' => 'cart'], function () {
 Route::group(['prefix' => 'checkout'], function () {
     Route::get('', 'frontend\CheckoutController@getCheckout');
     Route::post('', 'frontend\CheckoutController@postCheckout');
-    Route::get('complete', 'frontend\CheckoutController@getComplete');
+    Route::get('complete/{idOrder}', 'frontend\CheckoutController@getComplete');
 });
 
 //product

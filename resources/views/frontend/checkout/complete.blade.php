@@ -26,8 +26,8 @@
                     <span class="icon"><i class="icon-shopping-cart"></i></span>
                     <h2>Cảm ơn bạn đã mua hàng, Đơn hàng của bạn đã đặt thành công</h2>
                     <p>
-                        <a href="index.html" class="btn btn-primary">Trang chủ</a>
-                        <a href="shop.html" class="btn btn-primary btn-outline">Tiếp tục mua sắm</a>
+                        <a href="/" class="btn btn-primary">Trang chủ</a>
+                        <a href="/product/shop" class="btn btn-primary btn-outline">Tiếp tục mua sắm</a>
                     </p>
                 </div>
             </div>
@@ -38,15 +38,15 @@
                         <tbody>
                             <tr>
                                 <td>Đơn hàng số</td>
-                                <td>: 60235</td>
+                                <td>: {{$order->id}}</td>
                             </tr>
                             <tr>
                                 <td>Ngày mua</td>
-                                <td>: Oct 03, 2017</td>
+                                <td>: {{$order->updated_at}}</td>
                             </tr>
                             <tr>
                                 <td>Tổng tiền</td>
-                                <td>: ₫ 4.000.000</td>
+                                <td>: ₫ {{number_format($order->total,0,"",".")}}</td>
                             </tr>
                             <tr>
                                 <td>Phương thức thanh toán</td>
@@ -61,19 +61,19 @@
                         <tbody>
                             <tr>
                                 <td>Họ Tên</td>
-                                <td>: Nguyễn Văn A</td>
+                                <td>: {{$order->full}}</td>
                             </tr>
                             <tr>
                                 <td>Số điện thoại</td>
-                                <td>: 0123 456 789</td>
+                                <td>: {{$order->phone}}</td>
                             </tr>
                             <tr>
                                 <td>Địa chỉ</td>
-                                <td>: Số nhà B8A ngõ 18 đường Võ Văn Dũng - Hoàng Cầu - Đống Đa </td>
+                                <td>: {{$order->address}} </td>
                             </tr>
                             <tr>
                                 <td>Thành Phố</td>
-                                <td>: Hà Nội</td>
+                                <td>: {{$order->address}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,24 +81,24 @@
                 <div class="col-md-4">
                     <h3 class="billing-title mt-20 pl-15">Địa chỉ giao hàng</h3>
                     <table class="order-rable">
-                        <tbody>
-                            <tr>
-                                <td>Họ Tên</td>
-                                <td>: Nguyễn Văn A</td>
-                            </tr>
-                            <tr>
-                                <td>Số điện thoại</td>
-                                <td>: 0123 456 789</td>
-                            </tr>
-                            <tr>
-                                <td>Địa chỉ</td>
-                                <td>: Số nhà B8A ngõ 18 đường Võ Văn Dũng - Hoàng Cầu - Đống Đa </td>
-                            </tr>
-                            <tr>
-                                <td>Thành Phố</td>
-                                <td>: Hà Nội</td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                    <tr>
+                                        <td>Họ Tên</td>
+                                        <td>: {{$order->full}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số điện thoại</td>
+                                        <td>: {{$order->phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Địa chỉ</td>
+                                        <td>: {{$order->address}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thành Phố</td>
+                                        <td>: {{$order->address}}</td>
+                                    </tr>
+                            </tbody>
                     </table>
                 </div>
             </div>
@@ -115,25 +115,20 @@
 
                                     <div class="col-md-4 offset-md-4" align='right'>TỔNG CỘNG</div>
                                 </div>
+
+                                @foreach ($order->product_order as $row)
                                 <div class="list-row d-flex justify-content-between">
-                                    <div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
-                                    <div class="col-md-4" align='right'>x 02</div>
-                                    <div class="col-md-4" align='right'>₫ 720.000</div>
+                                        <div class="col-md-4">{{$row->name}} : color:red ,size:XL</div>
+                                        <div class="col-md-4" align='right'>x {{$row->qty}}</div>
+                                <div class="col-md-4" align='right'>₫ {{number_format($row->qty*$row->price,0,"",".")}}</div>
 
-                                </div>
-
-                                <div class="list-row d-flex justify-content-between">
-                                    <div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
-                                    <div class="col-md-4" align='right'>x 02</div>
-                                    <div class="col-md-4" align='right'>₫ 720.000</div>
-
-                                </div>
-
+                                    </div>
+                                @endforeach
                                 <div class="list-row border-bottom-0 d-flex justify-content-between">
                                     <div class="col-md-4">
                                         <h6>Tổng</h6>
                                     </div>
-                                    <div class="col-md-4 offset-md-4" align='right'>₫ 1.420.000</div>
+                                    <div class="col-md-4 offset-md-4" align='right'>₫ {{number_format($order->total,0,"",".")}}</div>
                                 </div>
                             </div>
                         </div>
