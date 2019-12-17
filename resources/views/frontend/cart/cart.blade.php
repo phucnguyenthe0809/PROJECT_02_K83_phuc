@@ -60,7 +60,7 @@
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                            <input onchange="return update('{{$row->rowId}}',this.value)" type="number" id="quantity" name="quantity"
+                            <input onchange="return update('{{ $row->rowId }}',this.value)" type="number" id="quantity" name="quantity"
                                 class="form-control input-number text-center" value="{{$row->qty}}">
                             </div>
                         </div>
@@ -114,7 +114,7 @@
     <script>
         function update(rowId,qty){
             $.get(
-                "/cart/update/"+rowId+"/"+qty,
+                "cart/update/"+rowId+"/"+qty,
                 function(data){
                     if (data=='success') {
                         location.reload();

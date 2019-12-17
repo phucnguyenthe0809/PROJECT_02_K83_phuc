@@ -1,5 +1,13 @@
 @extends('frontend.master.master')
-@section('title','Chi Tiết Sản Phẩm')
+@section('title')
+{{$prd->name}}
+@stop
+
+@section('seo')
+z
+<meta property="og:image:height" content="480" />
+@stop
+
 @section('content')
 <div class="colorlib-shop">
         <div class="container">

@@ -36,7 +36,9 @@ class ProductController extends Controller
     function getDetail($slug_prd) {
         $arr=explode('-',$slug_prd);
         $id=array_pop($arr);
-        $data['prd']=Product::find($id);
+        
+        //findOrFail nếu tìm thấy khóa chính thì lỗi 404
+        $data['prd']=Product::findOrFail($id);
         $data['prd_new']=Product::where('img','<>','no-img.jpg')->orderBy('updated_at','desc')->take(4)->get();
         return view('frontend.product.detail',$data);
     }

@@ -16,7 +16,7 @@
 // });
 
 //FRONTEND
-
+Route::post('send','frontend\HomeController@sendMail');
 
 Route::get('', 'frontend\HomeController@getIndex');
 Route::get('contact', 'frontend\HomeController@getContact');
@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
         Route::post('edit/{idPrd}','backend\ProductController@postEditProduct' );
         Route::get('del/{idPrd}','backend\ProductController@DelProduct' );
     });
+
 
     //user
     Route::group(['prefix' => 'user'], function () {

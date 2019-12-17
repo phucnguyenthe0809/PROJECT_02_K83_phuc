@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('get-home', 'apiController@getHome');
+Route::get('detail/{id_prd}/product', 'apiController@getDetail');
+Route::post('send-mail', 'apiController@sendMail');
+Route::get('paginate', 'apiController@getPaginate');

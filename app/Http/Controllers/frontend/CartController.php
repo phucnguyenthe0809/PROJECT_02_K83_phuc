@@ -13,17 +13,13 @@ class CartController extends Controller
         // dd(Cart::content());
         $data['cart']=Cart::content();
         $data['total']=Cart::total(0,"",".");
+     
         return view('frontend.cart.cart',$data);
     }
 
     function addCart(request $r){
         $prd=Product::find($r->id_product);
-        if ($r->quantity!='') {
-            $qty=$r->quantity;
-        } else {
-            $qty=1;
-        }
-
+        $qty=$r->quantity;
         Cart::add(['id' => $prd->code,
         'name' => $prd->name,
         'qty' => $qty,

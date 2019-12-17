@@ -7,11 +7,11 @@
                     <h2><i class="icon-paperplane"></i>Đăng ký nhận bản tin</h2>
                 </div>
                 <div class="col-md-6">
-                    <form class="form-inline qbstp-header-subscribe">
+                    <form action="/send" class="form-inline qbstp-header-subscribe" method="POST"> @csrf
                         <div class="row">
                             <div class="col-md-12 col-md-offset-0">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="email" placeholder="Nhập email của bạn">
+                                    <input name="email" type="email" class="form-control" id="email" placeholder="Nhập email của bạn">
                                     <button type="submit" class="btn btn-primary">Đăng ký</button>
                                 </div>
                             </div>

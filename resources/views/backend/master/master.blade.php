@@ -13,6 +13,8 @@
 	<!--Icons-->
 	<script src="js/lumino.glyphs.js"></script>
 	<link rel="stylesheet" href="Awesome/css/all.css">
+	<script src="/ckeditor/ckeditor.js"></script>
+	
 </head>
 <body>
 	<!-- header -->

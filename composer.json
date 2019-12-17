@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "bumbummen99/shoppingcart": "^2.8",
+        "ckfinder/ckfinder-laravel-package": "v3.5.1.2",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",

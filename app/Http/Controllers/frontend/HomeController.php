@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Product;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -20,5 +21,15 @@ class HomeController extends Controller
 
     function getAbout() {
         return view('frontend.about');
+    }
+
+    function sendMail(request $r)
+    {
+      $data['email']= $r->email;
+        Mail::send('mail', $data, function ($message) use ($data) {
+            $message->from('phucnguyenthe0809@gmail.com', 'VIETPRO');
+            $message->to($data['email'], 'Khách hàng');
+            $message->subject('Subject');
+        });
     }
 }

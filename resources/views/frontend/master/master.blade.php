@@ -5,8 +5,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>@yield('title')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="{{asset('frontend')}}/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	@yield('seo')
+	<base href="{{asset('frontend')}}/">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->

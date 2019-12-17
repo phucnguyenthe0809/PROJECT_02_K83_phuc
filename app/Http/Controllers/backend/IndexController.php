@@ -15,9 +15,10 @@ class IndexController extends Controller
         $data['month']=$monthNow;
         $data['order']=Order::where('state',1)->whereMonth('updated_at',$monthNow)->whereYear('updated_at',$yearNow);
         for($i=1;$i<=$monthNow;$i++){
-            $data['total']['Tháng '.$i]=Order::where('state',1)->whereMonth('updated_at',$i)->whereYear('updated_at',$yearNow)->sum('total');
+            $dl['Tháng '.$i]=Order::where('state',1)->whereMonth('updated_at',$i)->whereYear('updated_at',$yearNow)->sum('total');
         }
-
+        $data['total']=$dl;
+       
         return view('backend.index',$data);
     }
 }
